@@ -1,24 +1,44 @@
-// App.jsx
-import React, { useState } from "react";
-import AppDrawer from "./components/AppDrawer";
-import SettingsPage from "./components/Settings";
+import React, { useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRoutes from "./app/routes";
+import { useDispatch, useSelector } from "react-redux";
+import { setModules } from "./features/settings/settingsSlice";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./config/theme";
+import api from "./services/http"; // axios wrapper
 
-export default function App() {
-  // You can load this from API instead
-  const [modules, setModules] = useState({
-    dashboard: { label: "Dashboard", enabled: true },
-    users: { label: "Users", enabled: true },
-    reports: { label: "Reports", enabled: false },
-    settings: { label: "Settings", enabled: true },
-  });
+const App = () => {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.auth.user);
+
+  // Load module settings after user logs in
+  useEffect(() => {
+    const loadSettings = async () => {
+      if (!isAuthenticated) return;
+
+      try {
+        // const res = await api.get(`/settings/modules?role=${user.role}`);
+         const res = await api.get(`/settings/modules?role=super-admin`);
+        dispatch(setModules(res.data.modules));
+      } catch (error) {
+        console.error("Settings loading failed", error);
+      }
+    };
+
+    loadSettings();
+  }, [isAuthenticated]);
 
   return (
-    <div style={{ display: "flex" }}>
-      <AppDrawer open={true} modules={modules} />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
 
-      <div style={{ marginLeft: 260, padding: 20 }}>
-        <SettingsPage modules={modules} setModules={setModules} />
-      </div>
-    </div>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+
+    </ThemeProvider>
   );
-}
+};
+
+export default App;
