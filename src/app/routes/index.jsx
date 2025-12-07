@@ -10,9 +10,12 @@ import BillingPage from "../../features/billing/BillingPage";
 import SettingsPage from "../../features/settings/pages/ModuleSettings";
 import LoginPage from "../../features/auth/LoginPage";
 import NotFoundPage from "../../components/common/NotFoundPage";
+import CalendarPage from "../../features/calendar/CalendarPage";
+import AppointmentsPage from "../../features/appointments/AppointmentsPage";
 
 // Redux hooks
 import { useSelector } from "react-redux";
+
 
 // Protected route
 const ProtectedRoute = ({ children }) => {
@@ -57,6 +60,24 @@ const AppRoutes = () => {
             </ModuleGuard>
           }
         />
+          <Route
+            path="/calendar"
+            element={
+              <ModuleGuard module="calendar">
+                <CalendarPage />
+              </ModuleGuard>
+        }
+      />
+
+        <Route
+            path="/appointments"
+            element={
+              <ModuleGuard module="appointment">
+                <AppointmentsPage />
+              </ModuleGuard>
+        }
+       />
+
 
         <Route
           path="/doctors"

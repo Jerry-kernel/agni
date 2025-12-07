@@ -7,6 +7,20 @@ export const menuConfig = [
     module: "dashboard" // always enabled
   },
   {
+    label: "Appointments",
+    path: "/appointments",
+    icon: "Event",
+    roles: ["super-admin", "admin", "doctor"],
+    module: "appointments"
+  },
+  {
+  label: "Calendar",
+  path: "/calendar",
+  icon: "CalendarMonth",
+  roles: ["super-admin", "admin", "doctor", "nurse"],
+  module: "calendar",
+  },
+  {
     label: "Patients",
     path: "/patients",
     icon: "People",
@@ -26,13 +40,6 @@ export const menuConfig = [
     icon: "Badge",
     roles: ["super-admin", "admin"],
     module: "nurses"
-  },
-  {
-    label: "Appointments",
-    path: "/appointments",
-    icon: "Event",
-    roles: ["super-admin", "admin", "doctor"],
-    module: "appointments"
   },
   {
     label: "Billing",
@@ -61,5 +68,5 @@ export const menuConfig = [
     icon: "Settings",
     roles: ["super-admin", "admin"],
     module: "settings" 
-  }
+  },
 ];
