@@ -36,11 +36,23 @@ const ModuleGuard = ({ module, children }) => {
   return modules[module] !== false ? children : <Navigate to="/dashboard" replace />;
 };
 
+
 const AppRoutes = () => {
+  
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
+    
     <Routes>
       {/* Public route */}
       <Route path="/login" element={<LoginPage />} />
+
+      <Route
+        path="/"
+        element={
+          isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />
+        }
+      />
 
       {/* Protected routes */}
       <Route
