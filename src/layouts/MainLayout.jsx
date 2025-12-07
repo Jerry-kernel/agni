@@ -30,7 +30,7 @@ const MainLayout = () => {
           component="main"
           sx={{
             flexGrow: 1,
-            bgcolor: "#f5f5f5", // light gray background for content area
+            bgcolor: "#f5f5f5", 
             p: 2,
             overflow: "auto",
           }}
