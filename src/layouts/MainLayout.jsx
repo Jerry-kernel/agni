@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, CssBaseline } from "@mui/material";
 import Sidebar from "../components/layout/sidebar/Sidebar";
-import Topbar from "../components/layout/topbar/Topbar.jsx";
+import Topbar from "../components/layout/Topbar/Topbar";
 import { Outlet } from "react-router-dom";
 
 const drawerWidth = 240;
