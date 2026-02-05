@@ -1,108 +1,178 @@
-import { Box, Grid, Paper, Typography, Divider } from "@mui/material";
-import PeopleIcon from "@mui/icons-material/People";
+import {
+  Box,
+  Grid,
+  Paper,
+  Typography,
+  Divider,
+  Button,
+  Chip,
+  Stack,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
+
+import PetsIcon from "@mui/icons-material/Pets";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import AddIcon from "@mui/icons-material/Add";
+
+import { LineChart, BarChart, PieChart } from "@mui/x-charts";
 
 const DashboardPage = () => {
+  const appointments = [
+    { pet: "Buddy", owner: "John Doe", type: "Checkup", status: "Completed" },
+    { pet: "Luna", owner: "Sarah Brown", type: "Vaccination", status: "Pending" },
+    { pet: "Rocky", owner: "Mike Smith", type: "Surgery", status: "In Progress" },
+  ];
+
   return (
-    <Box sx={{ p: 2 }}>
-      {/* Page Title */}
-      <Typography variant="h5" fontWeight="bold" sx={{ mb: 2 }}>
-        Admin Dashboard
-      </Typography>
+    <Box sx={{ p: 3 }}>
+      {/* HEADER */}
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography variant="h5" fontWeight="bold">
+          Veterinary Hospital Dashboard
+        </Typography>
+
+        <Stack direction="row" spacing={1}>
+          <Button variant="contained" startIcon={<AddIcon />}>
+            New Appointment
+          </Button>
+          <Button variant="outlined" startIcon={<AddIcon />}>
+            Add Pet
+          </Button>
+        </Stack>
+      </Stack>
 
       {/* KPI CARDS */}
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper elevation={3} sx={{ p: 2, display: "flex", alignItems: "center" }}>
-            <PeopleIcon color="primary" sx={{ fontSize: 40, mr: 2 }} />
-            <Box>
-              <Typography variant="h6">Total Patients</Typography>
-              <Typography variant="h5" fontWeight="bold">
-                1,245
-              </Typography>
-            </Box>
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        {[
+          { label: "Total Pets", value: "1,540", icon: <PetsIcon />, color: "primary" },
+          { label: "Veterinarians", value: "12", icon: <LocalHospitalIcon />, color: "success" },
+          { label: "Appointments Today", value: "46", icon: <EventAvailableIcon />, color: "warning" },
+          { label: "Monthly Revenue", value: "$92,300", icon: <MonetizationOnIcon />, color: "error" },
+        ].map((item, index) => (
+          <Grid key={index} size={{ xs: 12, sm: 6, md: 3 }}>
+            <Paper sx={{ p: 2, display: "flex", alignItems: "center" }}>
+              <Box sx={{ mr: 2, color: `${item.color}.main` }}>
+                {item.icon}
+              </Box>
+              <Box>
+                <Typography variant="body2">{item.label}</Typography>
+                <Typography variant="h6" fontWeight="bold">
+                  {item.value}
+                </Typography>
+              </Box>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* CHARTS */}
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        <Grid size={{ xs: 12, md: 8 }}>
+          <Paper sx={{ p: 2 }}>
+            <Typography fontWeight="bold">Appointments Trend</Typography>
+            <Divider sx={{ my: 1 }} />
+
+            <LineChart
+              height={250}
+              series={[
+                { data: [20, 35, 40, 55, 70, 60, 80], label: "Appointments" },
+              ]}
+              xAxis={[
+                {
+                  scaleType: "point",
+                  data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                },
+              ]}
+            />
           </Paper>
         </Grid>
 
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper elevation={3} sx={{ p: 2, display: "flex", alignItems: "center" }}>
-            <LocalHospitalIcon color="success" sx={{ fontSize: 40, mr: 2 }} />
-            <Box>
-              <Typography variant="h6">Doctors</Typography>
-              <Typography variant="h5" fontWeight="bold">
-                48
-              </Typography>
-            </Box>
-          </Paper>
-        </Grid>
+        <Grid size={{ xs: 12, md: 4 }}>
+          <Paper sx={{ p: 2 }}>
+            <Typography fontWeight="bold">Pets by Species</Typography>
+            <Divider sx={{ my: 1 }} />
 
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper elevation={3} sx={{ p: 2, display: "flex", alignItems: "center" }}>
-            <EventAvailableIcon color="warning" sx={{ fontSize: 40, mr: 2 }} />
-            <Box>
-              <Typography variant="h6">Appointments</Typography>
-              <Typography variant="h5" fontWeight="bold">
-                320
-              </Typography>
-            </Box>
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={3}>
-          <Paper elevation={3} sx={{ p: 2, display: "flex", alignItems: "center" }}>
-            <MonetizationOnIcon color="error" sx={{ fontSize: 40, mr: 2 }} />
-            <Box>
-              <Typography variant="h6">Revenue</Typography>
-              <Typography variant="h5" fontWeight="bold">
-                $84,000
-              </Typography>
-            </Box>
+            <PieChart
+              height={250}
+              series={[
+                {
+                  data: [
+                    { id: 0, value: 60, label: "Dogs" },
+                    { id: 1, value: 25, label: "Cats" },
+                    { id: 2, value: 10, label: "Birds" },
+                    { id: 3, value: 5, label: "Others" },
+                  ],
+                },
+              ]}
+            />
           </Paper>
         </Grid>
       </Grid>
 
-      {/* MAIN CONTENT ROW */}
+      {/* TABLE + SIDE */}
       <Grid container spacing={2} sx={{ mt: 2 }}>
-        {/* Recent Patients */}
-        <Grid item xs={12} md={7}>
-          <Paper elevation={3} sx={{ p: 2 }}>
-            <Typography variant="h6" fontWeight="bold">
-              Recent Patients
-            </Typography>
+        <Grid size={{ xs: 12, md: 7 }}>
+          <Paper sx={{ p: 2 }}>
+            <Typography fontWeight="bold">Today’s Appointments</Typography>
             <Divider sx={{ my: 1 }} />
 
-            <Box>
-              <Typography variant="body1">• John Doe - Fever</Typography>
-              <Typography variant="body1">• Sarah Brown - Checkup</Typography>
-              <Typography variant="body1">• Michael Smith - Surgery</Typography>
-              <Typography variant="body1">• Nancy Wilson - Diabetes follow-up</Typography>
-            </Box>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Pet</TableCell>
+                  <TableCell>Owner</TableCell>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Status</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {appointments.map((row, index) => (
+                  <TableRow key={index}>
+                    <TableCell>{row.pet}</TableCell>
+                    <TableCell>{row.owner}</TableCell>
+                    <TableCell>{row.type}</TableCell>
+                    <TableCell>
+                      <Chip
+                        label={row.status}
+                        size="small"
+                        color={
+                          row.status === "Completed"
+                            ? "success"
+                            : row.status === "Pending"
+                            ? "warning"
+                            : "info"
+                        }
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </Paper>
         </Grid>
 
-        {/* Appointments Chart Placeholder */}
-        <Grid item xs={12} md={5}>
-          <Paper elevation={3} sx={{ p: 2 }}>
-            <Typography variant="h6" fontWeight="bold">
-              Appointment Trends
-            </Typography>
+        <Grid size={{ xs: 12, md: 5 }}>
+          <Paper sx={{ p: 2 }}>
+            <Typography fontWeight="bold">Top Treatments</Typography>
             <Divider sx={{ my: 1 }} />
 
-            <Box
-              sx={{
-                height: 200,
-                bgcolor: "#eaeaea",
-                borderRadius: 1,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "gray",
-              }}
-            >
-              Chart Placeholder
-            </Box>
+            <BarChart
+              height={250}
+              series={[{ data: [40, 30, 25, 15], label: "Cases" }]}
+              xAxis={[
+                {
+                  scaleType: "band",
+                  data: ["Vaccination", "Surgery", "Dental", "Checkup"],
+                },
+              ]}
+            />
           </Paper>
         </Grid>
       </Grid>

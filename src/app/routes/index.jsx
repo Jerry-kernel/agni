@@ -15,6 +15,7 @@ import AppointmentsPage from "../../features/appointments/AppointmentsPage";
 
 // Redux hooks
 import { useSelector } from "react-redux";
+import OnboardingForm from "../../features/onboarding/Onboarding";
 
 
 // Protected route
@@ -124,6 +125,8 @@ const AppRoutes = () => {
           }
         />
       </Route>
+
+      <Route path="/signup" element={<OnboardingForm />} />
 
       {/* 404 */}
       <Route path="*" element={<NotFoundPage />} />
