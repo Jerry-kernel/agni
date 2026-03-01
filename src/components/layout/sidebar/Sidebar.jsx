@@ -24,7 +24,6 @@ const Sidebar = ({ open, drawerWidth, onClose }) => {
       onClose={onClose}          // 🔥 IMPORTANT to close drawer on click outside
       ModalProps={{
         keepMounted: true,
-        hideBackdrop: true,     // hides dull background
       }}
       sx={{
         "& .MuiDrawer-paper": {
