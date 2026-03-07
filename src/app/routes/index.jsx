@@ -11,7 +11,7 @@ import SettingsPage from "../../features/settings/pages/ModuleSettings";
 import LoginPage from "../../features/auth/LoginPage";
 import NotFoundPage from "../../components/common/NotFoundPage";
 import CalendarPage from "../../features/calendar/CalendarPage";
-import AppointmentsPage from "../../features/appointments/AppointmentsPage";
+import AppointmentsPage from "../../features/appointments/pages/AppointmentsPage";
 
 // Redux hooks
 import { useSelector } from "react-redux";
