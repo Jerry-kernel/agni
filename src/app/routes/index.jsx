@@ -16,6 +16,7 @@ import AppointmentsPage from "../../features/appointments/AppointmentsPage";
 // Redux hooks
 import { useSelector } from "react-redux";
 import OnboardingForm from "../../features/onboarding/Onboarding";
+import AppointmentCreate from "../../features/appointments/pages/AppointmentCreate";
 
 
 // Protected route
@@ -90,7 +91,14 @@ const AppRoutes = () => {
               </ModuleGuard>
         }
        />
-
+        <Route
+            path="/appointments/new"
+            element={
+              <ModuleGuard module="appointment">
+                <AppointmentCreate />
+              </ModuleGuard>
+        }
+       />
 
         <Route
           path="/doctors"
