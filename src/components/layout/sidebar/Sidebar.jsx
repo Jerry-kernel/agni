@@ -1,24 +1,17 @@
-import { Drawer, List, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import React from "react";
+import {
+  Drawer,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+} from "@mui/material";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import * as Icons from "@mui/icons-material";
 import { menuConfig } from "./menuconfig";
 
-const drawerWidth = 240;
-
-
-
-const Sidebar = () => {
-  const role = useSelector((state) => state.auth.user.role);
-  const modules = useSelector((state) => state.settings.modules) || {};
-
-
-  const filteredMenu = menuConfig.filter((item) => {
-    const roleAllowed = item.roles.includes(role);
-    const moduleEnabled = modules[item.module] !== false; // undefined means enabled
-    return roleAllowed && moduleEnabled;
-  });
-
+const Sidebar = ({ open, drawerWidth, onClose }) => {
   const renderIcon = (iconName) => {
     const IconComponent = Icons[iconName] || Icons["Menu"];
     return <IconComponent />;
@@ -26,31 +19,33 @@ const Sidebar = () => {
 
   return (
     <Drawer
-      variant="permanent"
+      variant="persistent"
+      open={open}
+      onClose={onClose}          // 🔥 IMPORTANT to close drawer on click outside
+      ModalProps={{
+        keepMounted: true,
+      }}
       sx={{
-        width: drawerWidth,
-        flexShrink: 0,
         "& .MuiDrawer-paper": {
           width: drawerWidth,
           boxSizing: "border-box",
-          top: "64px", // offset below Topbar (AppBar default height)
-          height: "calc(100vh - 64px)",
-          borderRight: "1px solid rgba(0,0,0,0.12)",
         },
       }}
     >
+      <Toolbar />
       <List>
-        {filteredMenu.map((item) => (
+        {menuConfig.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             style={{ textDecoration: "none", color: "inherit" }}
-            activeclassname="Mui-selected"
           >
-            <ListItemButton>
-              <ListItemIcon>{renderIcon(item.icon)}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItemButton>
+            {({ isActive }) => (
+              <ListItemButton selected={isActive}>
+                <ListItemIcon>{renderIcon(item.icon)}</ListItemIcon>
+                <ListItemText primary={item.label} />
+              </ListItemButton>
+            )}
           </NavLink>
         ))}
       </List>

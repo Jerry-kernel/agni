@@ -21,6 +21,8 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import AddIcon from "@mui/icons-material/Add";
 
 import { LineChart, BarChart, PieChart } from "@mui/x-charts";
+import { useNavigate } from "react-router-dom";
+
 
 const DashboardPage = () => {
   const appointments = [
@@ -28,6 +30,7 @@ const DashboardPage = () => {
     { pet: "Luna", owner: "Sarah Brown", type: "Vaccination", status: "Pending" },
     { pet: "Rocky", owner: "Mike Smith", type: "Surgery", status: "In Progress" },
   ];
+  const navigate = useNavigate();
 
   return (
     <Box sx={{ p: 3 }}>
@@ -38,7 +41,7 @@ const DashboardPage = () => {
         </Typography>
 
         <Stack direction="row" spacing={1}>
-          <Button variant="contained" startIcon={<AddIcon />}>
+          <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate("/appointments/new")}>
             New Appointment
           </Button>
           <Button variant="outlined" startIcon={<AddIcon />}>

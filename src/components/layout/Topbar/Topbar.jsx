@@ -4,18 +4,19 @@ import {
   Toolbar,
   IconButton,
   Typography,
+  Box,
   InputBase,
   Badge,
   Avatar,
   Menu,
   MenuItem,
-  Box,
   Tooltip,
   alpha,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+
 
 /* 🔹 Extracted styled helpers */
 const Search = (props) => (
@@ -45,14 +46,22 @@ const SearchIconWrapper = () => (
 const StyledInputBase = (props) => (
   <InputBase
     placeholder="Search…"
-    inputProps={{ "aria-label": "search" }}
-    sx={{ color: "inherit", width: "100%" }}
+    sx={{
+      color: "inherit",
+      width: { xs: "100px", md: "200px" },
+      transition: "width 0.3s",
+      "&:focus": {
+        width: { md: "260px" },
+      },
+    }}
     {...props}
   />
 );
 
-const Topbar = ({ onDrawerToggle, showMenuButton = true }) => {
-  const [anchorElUser, setAnchorElUser] = useState(null);
+
+
+const Topbar = ({ onDrawerToggle }) => {
+    const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -64,30 +73,28 @@ const Topbar = ({ onDrawerToggle, showMenuButton = true }) => {
 
   return (
     <AppBar
-      position="sticky"
-      color="primary"
+      position="fixed"
       elevation={3}
       sx={{
         zIndex: (theme) => theme.zIndex.drawer + 1,
+        borderRadius: 0,
       }}
     >
-      <Toolbar sx={{ justifyContent: "space-between" }}>
-        {/* LEFT */}
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-          {showMenuButton && (
-            <IconButton
-              color="inherit"
-              edge="start"
-              onClick={onDrawerToggle}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+      <Toolbar>
+        <IconButton
+          color="inherit"
+          edge="start"
+          onClick={onDrawerToggle}
+          sx={{ mr: 2 }}
+        >
+          <MenuIcon />
+        </IconButton>
 
-          <Typography variant="h6" fontWeight={700} noWrap>
-            AGNI
-          </Typography>
-        </Box>
+        <Typography variant="h6" fontWeight={700}>
+          AGNI
+        </Typography>
+
+        <Box sx={{ flexGrow: 1 }} />
 
         {/* RIGHT */}
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
@@ -120,6 +127,7 @@ const Topbar = ({ onDrawerToggle, showMenuButton = true }) => {
             <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
           </Menu>
         </Box>
+
       </Toolbar>
     </AppBar>
   );
