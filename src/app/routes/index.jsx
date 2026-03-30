@@ -4,7 +4,7 @@ import MainLayout from "../../layouts/MainLayout";
 
 // Pages
 import DashboardPage from "../../features/dashboard/DashboardPage";
-import PatientsPage from "../../features/patients/PatientsPage";
+import PetRecords from "../../features/petrecords/PetRecords";
 import DoctorsPage from "../../features/doctors/DoctorsPage";
 import BillingPage from "../../features/billing/BillingPage";
 import SettingsPage from "../../features/settings/pages/ModuleSettings";
@@ -17,6 +17,7 @@ import AppointmentsPage from "../../features/appointments/pages/AppointmentsPage
 import { useSelector } from "react-redux";
 import OnboardingForm from "../../features/onboarding/Onboarding";
 import AppointmentCreate from "../../features/appointments/pages/AppointmentCreate";
+import PetOnboardingPage from "../../features/petonboarding/PetOnboardingPage";
 
 
 // Protected route
@@ -67,10 +68,19 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
 
         <Route
-          path="/patients"
+          path="/petrecords/new"
           element={
-            <ModuleGuard module="patients">
-              <PatientsPage />
+            <ModuleGuard module="petrecords">
+              <PetOnboardingPage />
+            </ModuleGuard>
+          }
+        />
+
+        <Route
+          path="/petrecords"
+          element={
+            <ModuleGuard module="petrecords">
+              <PetRecords />
             </ModuleGuard>
           }
         />

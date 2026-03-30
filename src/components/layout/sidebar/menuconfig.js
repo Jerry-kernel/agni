@@ -21,11 +21,11 @@ export const menuConfig = [
   module: "calendar",
   },
   {
-    label: "Patients",
-    path: "/patients",
+    label: "Pet Records",
+    path: "/petrecords",
     icon: "People",
     roles: ["super-admin", "admin", "doctor", "nurse"],
-    module: "patients"
+    module: "petrecords"
   },
   {
     label: "Doctors",
