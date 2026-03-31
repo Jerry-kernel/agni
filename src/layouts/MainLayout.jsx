@@ -33,9 +33,9 @@ const MainLayout = () => {
         component="main"
         sx={{
           flexGrow: 1,
-          ml: open ? `${drawerWidth}px` : 0,
+          // ml: open ? `${drawerWidth}px` : 0,
           transition: "margin 0.3s ease",
-          width: "100%",
+          // width: "100%",
         }}
       >
         <Toolbar />

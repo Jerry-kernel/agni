@@ -4,7 +4,7 @@ import AppRoutes from "./app/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { setModules } from "./features/settings/settingsSlice";
 import { ThemeProvider, CssBaseline } from "@mui/material";
-import theme from "./config/theme";
+import theme from "./theme/theme";
 import api from "./services/http"; // axios wrapper
 
 const App = () => {
