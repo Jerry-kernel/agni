@@ -4,10 +4,13 @@ import MainLayout from "../../layouts/MainLayout";
 
 // Pages
 import DashboardPage from "../../features/dashboard/DashboardPage";
-import PatientsPage from "../../features/patients/PatientsPage";
+import PetRecords from "../../features/petrecords/PetRecords";
 import DoctorsPage from "../../features/doctors/DoctorsPage";
 import BillingPage from "../../features/billing/BillingPage";
-import SettingsPage from "../../features/settings/pages/ModuleSettings";
+// import SettingsPage from "../../features/settings/pages/ModuleSettings";
+import DoctorOnboardingPage from "../../features/doctoronboarding/DoctorOnboardingPage";
+import DoctorViewPage from "../../features/doctorview/DoctorViewPage";
+import SettingsPage from "../../features/settings/ModuleSettings"
 import LoginPage from "../../features/auth/LoginPage";
 import NotFoundPage from "../../components/common/NotFoundPage";
 import CalendarPage from "../../features/calendar/CalendarPage";
@@ -17,6 +20,7 @@ import AppointmentsPage from "../../features/appointments/pages/AppointmentsPage
 import { useSelector } from "react-redux";
 import OnboardingForm from "../../features/onboarding/Onboarding";
 import AppointmentCreate from "../../features/appointments/pages/AppointmentCreate";
+import PetOnboardingPage from "../../features/petonboarding/PetOnboardingPage";
 
 
 // Protected route
@@ -67,10 +71,19 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<DashboardPage />} />
 
         <Route
-          path="/patients"
+          path="/petrecords/new"
           element={
-            <ModuleGuard module="patients">
-              <PatientsPage />
+            <ModuleGuard module="petrecords">
+              <PetOnboardingPage />
+            </ModuleGuard>
+          }
+        />
+
+        <Route
+          path="/petrecords"
+          element={
+            <ModuleGuard module="petrecords">
+              <PetRecords />
             </ModuleGuard>
           }
         />
@@ -100,7 +113,7 @@ const AppRoutes = () => {
         }
        />
 
-        <Route
+       <Route
           path="/doctors"
           element={
             <ModuleGuard module="doctors">
@@ -109,7 +122,31 @@ const AppRoutes = () => {
               </RoleGuard>
             </ModuleGuard>
           }
+        /> 
+
+
+        <Route
+          path="/doctors/new"
+          element={
+            <ModuleGuard module="doctors">
+              <RoleGuard allowedRoles={["super-admin", "admin"]}>
+                <DoctorOnboardingPage />
+              </RoleGuard>
+            </ModuleGuard>
+          }
         />
+
+      <Route
+        path="/doctors/:id"
+        element={
+          <ModuleGuard module="doctors">
+            <RoleGuard allowedRoles={["super-admin", "admin"]}>
+              <DoctorViewPage />
+            </RoleGuard>
+          </ModuleGuard>
+        }
+      />
+
 
         <Route
           path="/billing"

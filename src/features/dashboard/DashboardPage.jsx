@@ -44,7 +44,7 @@ const DashboardPage = () => {
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => navigate("/appointments/new")}>
             New Appointment
           </Button>
-          <Button variant="outlined" startIcon={<AddIcon />}>
+          <Button variant="outlined" startIcon={<AddIcon />} onClick={() => navigate("/petrecords/new")}>
             Add Pet
           </Button>
         </Stack>
