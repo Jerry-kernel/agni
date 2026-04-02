@@ -9,7 +9,7 @@ import {
   SPECIALIZATION_FILTER, DEPARTMENT_FILTER,
   STATUS_FILTER, EMPLOYMENT_FILTER, SORT_OPTIONS,
 } from "../constants/mockDoctors";
-
+ 
 const PRIMARY = "#1B5E8C";
 const FONT    = "'Nunito', sans-serif";
 
