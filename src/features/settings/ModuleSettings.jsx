@@ -8,7 +8,7 @@ import { Settings } from "@mui/icons-material";
 import { useSettings }     from "./hooks/useSettings";
 import SettingsSidebar     from "./components/SettingsSidebar";
 import OrgProfile          from "./pages/OrgProfile";
-import AnimalMaster    from "./pages/AnimalMaster";
+import AnimalMasterPage from "../animalmaster/AnimalMasterPage";
 import FeatureSettings     from "./pages/FeatureSettings";
 import UsersRoles          from "./pages/UsersRoles";
 import ServicesPricing     from "./pages/ServicesPricing";
@@ -17,7 +17,7 @@ import ServicesPricing     from "./pages/ServicesPricing";
 // Map key → component
 const PAGE_MAP = {
   "org-profile":     <OrgProfile />,
-  "animal":       <AnimalMaster />,
+  "animal-master": <AnimalMasterPage />,
   "features":        <FeatureSettings />,
   "users-roles":     <UsersRoles />,
   "services-pricing":<ServicesPricing />,

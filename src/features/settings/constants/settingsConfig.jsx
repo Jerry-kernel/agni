@@ -1,6 +1,6 @@
 import {
   Business, AutoAwesome, ToggleOn,
-  People, LocalOffer,
+  People, LocalOffer, Pets
 } from "@mui/icons-material";
 import React from "react";
 
@@ -12,13 +12,11 @@ export const SETTINGS_NAV = [
     color:    "#2A7F6F",
     subtitle: "Clinic details, branding & contact info",
   },
-  {
-    key:      "animal",
-    label:    "Animal Master Data",
-    icon:     <AutoAwesome />,
-    color:    "#7B5EA7",
-    subtitle: "Animals Master Data & Breed types",
-  },
+  { key:      "animal-master", 
+    label:    "Animal Master Data", 
+    icon:     <Pets />, 
+    color:    "#2A7F6F", 
+    subtitle: "Species, breeds, colors & blood groups" },
   {
     key:      "features",
     label:    "Feature Settings",

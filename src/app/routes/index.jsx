@@ -5,9 +5,10 @@ import MainLayout from "../../layouts/MainLayout";
 // Pages
 import DashboardPage from "../../features/dashboard/DashboardPage";
 import PetRecords from "../../features/petrecords/PetRecords";
-import DoctorsPage from "../../features/doctors/DoctorsPage";
+// import DoctorsPage from "../../features/doctors/DoctorsPage";
 import BillingPage from "../../features/billing/BillingPage";
 // import SettingsPage from "../../features/settings/pages/ModuleSettings";
+import DoctorOnboardingPage from "../../features/doctoronboarding/DoctorOnboardingPage";
 import SettingsPage from "../../features/settings/ModuleSettings"
 import LoginPage from "../../features/auth/LoginPage";
 import NotFoundPage from "../../components/common/NotFoundPage";
@@ -111,12 +112,24 @@ const AppRoutes = () => {
         }
        />
 
-        <Route
+        {/* <Route
           path="/doctors"
           element={
             <ModuleGuard module="doctors">
               <RoleGuard allowedRoles={["super-admin", "admin"]}>
                 <DoctorsPage />
+              </RoleGuard>
+            </ModuleGuard>
+          }
+        /> */}
+
+
+        <Route
+          path="/doctors/new"
+          element={
+            <ModuleGuard module="doctors">
+              <RoleGuard allowedRoles={["super-admin", "admin"]}>
+                <DoctorOnboardingPage />
               </RoleGuard>
             </ModuleGuard>
           }
